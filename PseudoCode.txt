@@ -1,0 +1,37 @@
+Core Features:
+    - Input total tips 
+    - Add staff on the shift : Name, Role(Bartender, Server, Barback), Hours on the clock
+    - Assign weight multiplier per role (if applicable)
+    - Calculate and display the payout for each person working
+
+Down the road Features:
+    - Input validation
+    - Handle rounding errors
+    - Improve the UI
+    - Introduce API thinking
+    - System level: Save past shifts, preset roles, editable payouts, export results or 'print view'
+    - Edge case handling: Zero tips, missing staff, rounding fairness
+
+Frontend: HTML, CSS, JavaScript
+Backend: Python
+
+Payout Rules: 
+    + This is for one single shift, no multi-shift logic yet (maybe ability to store results though later on).
+    + Tips are distributed proportionally by the amount of hours worked for the shift. 
+    + Decimal hours are allowed
+    + Payouts are rounded to the nearest cent (but typically there will be no change involved)
+    + Any remaining cents leftover after rounding are distributed starting with the employee who worked the most hours OR support staff (decide later)
+    + Invalid input = negative hours, missing name = rejected with a message to correct
+
+Input:
+    - Total amount of tips
+    - Employees names
+    - Number of hours each employee worked for the shift
+
+Output:
+    - Total tips made / Total hours on the tip pool = tips per hour
+    - Name : total hours worked * tips $ per hour amount = total $ amount of payout
+
+Other Details:
+    > Display results in ascending order: Those making the least to those making the most
+
