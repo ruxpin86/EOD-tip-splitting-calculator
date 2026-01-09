@@ -35,3 +35,9 @@ Output:
 Other Details:
     > Display results in ascending order: Those making the least to those making the most
 
+Color Pallete
+01161e
+124559
+598392
+aec3b0
+eff6e0

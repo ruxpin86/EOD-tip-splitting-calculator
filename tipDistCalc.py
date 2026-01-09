@@ -15,6 +15,8 @@ def get_employee_info():
 
 def calculate_tip_share(employee_info):
     total_tips = float(input("What was the total amount of tips collected?: "))
+    print()
+
     employee_hours = []
     for key in employee_info:
         hours = employee_info[key]
@@ -23,16 +25,19 @@ def calculate_tip_share(employee_info):
 
     tips_per_hour = total_tips / total_hours
 
-    print(f"Total tips: S{total_tips:.2f}")
+    print(f"Total tips: ${total_tips:.2f}")
     print(f"Hours on tip pool: {total_hours}")
-    print(f"Tips per hour: ${tips_per_hour:.2f}")
+    print(f"Tips per hour: ${tips_per_hour:.2f}\n")
 
     for key in employee_info:
         hours = employee_info[key]
         ind_empl_total = hours * tips_per_hour
         employee_info[key] = ind_empl_total
 
-    print(f"Employee individual payout: {employee_info}")
+    print("Employee tip pay-outs for this shift...\n")
+    for name, tips_amt in employee_info.items():
+        print(f"{name}: ${tips_amt:.0f}")
+    print()
 
     return employee_info
 
