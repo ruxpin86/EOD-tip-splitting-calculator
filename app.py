@@ -8,8 +8,11 @@ app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
-        print(request.form)
-
+        raw_text = request.form["employees"] #get the input from the page and conver it to a string
+        emp_dict = parse_employee_data(raw_text) #parse the raw_text into a form that is usable by the calculator
+        total_tips = float(request.form["total_tips"]) #grab the total_tips input from the page
+        results = calculate_tip_share(emp_dict, total_tips) #calculate the tip out
+    
     return render_template("index.html")
 
 def parse_employee_data(text):
@@ -25,9 +28,5 @@ def parse_employee_data(text):
         employee_info[name] = hours # assign the hours value to the key name
 
     return employee_info
-
-
-form_text = home()
-parse_employee_data(form_text)
 
 app.run(debug=True)
