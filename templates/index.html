@@ -18,8 +18,23 @@
             <button type="submit">Calculate Tip Out</button>
         </form>
     </div>
-    <div class="wrapper">
-        {{ payouts }}
-    </div>
+    {% if payouts %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Employees</th>
+                    <th>Payouts</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for name, amount in payouts.items() %}
+                    <tr>
+                        <td>{{name}}</td> 
+                        <td>{{amount}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 </body>
 </html>
