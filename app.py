@@ -1,9 +1,11 @@
 from flask import Flask
 from flask import render_template
 from flask import request
+from flask import flash
 from tipDistCalc import calculate_tip_share
 
 app = Flask(__name__)
+app.secret_key = "super-secret-key-change-this-later" #needed for flash messages
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -22,11 +24,21 @@ def parse_employee_data(text):
     lines = text.split("\n") #split lines at every new line
 
     for line in lines:
-        name, hours = line.split(",") #split name and hours at each comma
-        name = name.strip() #clean up the name
-        hours = int(hours.strip()) #clean up the hours
+        line = line.strip()
+        if not line:
+            continue #ignore any blank lines
 
-        employee_info[name] = hours # assign the hours value to the key name
+        if "," not in line:
+            flash(f"⚠️ Could not process '{line}'. Make sure it follows 'Name, Hours' format (e.g. Ted, 8).", "warning")
+            continue
+
+        name, hours = line.split(",", 1) #split name and hours at each comma
+        name = name.strip() #clean up the name
+        try:
+            hours = float(hours.strip()) #clean up the hours and allow for portion of an hour to be calculated/entered
+            employee_info[name] = hours # assign the hours value to the key name
+        except ValueError:
+            flash(f"⚠️ Invalid hours for '{name}. Please enter a valid number for hours worked.", "warning")
 
     return employee_info
 
