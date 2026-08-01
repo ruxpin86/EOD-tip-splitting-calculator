@@ -37,7 +37,7 @@
                     id="empName-hours" 
                     name="employees" 
                     rows="6" 
-                    placeholder="Joben, 8&#10;Sarah, 6.5&#10;Alex, 7.5" 
+                    placeholder="Joben, 8&#10;Xena, 6.5&#10;Rabberto, 7.5" 
                     required></textarea>
 
                 <label for="total_tips">
@@ -54,28 +54,35 @@
                 <button type="submit" class="contrast">Calculate Tip Out</button>
             </form>
         </article>
-
         {% if payouts %}
-            <article>
-                <h3>Payout Results</h3>
-                <table class="striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Employee</th>
-                            <th scope="col" style="text-align: right;">Tip Share</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for name, amount in payouts.items() %}
-                            <tr>
-                                <td><strong>{{ name }}</strong></td> 
-                                <td style="text-align: right;">${{ "%.2f"|format(amount) }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </article>
-        {% endif %}
+        <div class="hourly-rate-card">
+            <h3>Shift Rate: <strong>${{ "%.2f"|format(hourly_rate) }}/hr</strong></h3>
+        </div>
+        <article>
+            <header style="display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="margin: 0;">Payout Results</h3>
+                    <p style="margin: 0;"><strong>Shift Rate:</strong> ${{ "%.2f"|format(hourly_rate) }}/hr</p>
+            </header>
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Employee</th>
+                        <th scope="col" style="text-align: right;">Hours</th>
+                        <th scope="col" style="text-align: right;">Tip Share</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for name, data in payouts.items() %}
+                    <tr>
+                        <td><strong>{{ name }}</strong></td> 
+                        <td style="text-align: right;">{{ data.hours }}</td>
+                        <td style="text-align: right;">${{ "%.2f"|format(data.tips) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </article>
+    {% endif %}
     </main>
 </body>
 </html>

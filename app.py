@@ -9,6 +9,9 @@ app.secret_key = "super-secret-key-change-this-later" #needed for flash messages
 
 @app.route("/", methods=["GET", "POST"])
 def home():
+    payouts = None
+    hourly_rate = None
+    
     if request.method == "POST":
         raw_text = request.form["employees"] #get the input from the page and convert it to a string
         emp_dict = parse_employee_data(raw_text) #parse the raw_text into a form that is usable by the calculator
