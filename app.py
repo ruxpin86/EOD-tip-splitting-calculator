@@ -9,14 +9,13 @@ app.secret_key = "super-secret-key-change-this-later" #needed for flash messages
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    results = None
     if request.method == "POST":
         raw_text = request.form["employees"] #get the input from the page and convert it to a string
         emp_dict = parse_employee_data(raw_text) #parse the raw_text into a form that is usable by the calculator
         total_tips = float(request.form["total_tips"]) #grab the total_tips input from the page
-        results = calculate_tip_share(emp_dict, total_tips) #calculate the tip out
+        payouts, hourly_rate = calculate_tip_share(emp_dict, total_tips) #calculate the tip out
     
-    return render_template("index.html", payouts=results)
+    return render_template("index.html", payouts=payouts, hourly_rate=hourly_rate)
 
 def parse_employee_data(text):
     employee_info = {} #dictionary that will be populated with employee data
