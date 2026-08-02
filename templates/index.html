@@ -26,8 +26,8 @@
                     {% endfor %}
                 {% endif %}
             {% endwith %}
-            <form action="/" method="POST">
-                <label for="empName-hours">
+                <form action="{{ url_for('home') }}" method="POST">                
+                    <label for="empName-hours">
                     <strong>Employees & Hours</strong>
                     <small style="display:block; color: var(--pico-muted-color); margin-bottom: 0.5rem;">
                         Enter name and hours on a new line <span style="white-space: nowrap;">(e.g. <code>Joben, 8</code>)</span>
