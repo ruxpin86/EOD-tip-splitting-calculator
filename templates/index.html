@@ -44,14 +44,13 @@
                     <strong>Total Tips Collected ($)</strong>
                 </label>
                 <input 
-                    type="number" 
-                    step="0.01"
-                    inputmode="decimal" 
-                    id="total_tips" 
-                    name="total_tips" 
-                    placeholder="500.00" 
-                    required>
-
+                type="text" 
+                inputmode="decimal" 
+                pattern="[0-9]*" 
+                id="total_tips" 
+                name="total_tips" 
+                placeholder="500.00" 
+                required>
                 <button type="submit" class="contrast">Calculate Tip Out</button>
             </form>
         </article>
