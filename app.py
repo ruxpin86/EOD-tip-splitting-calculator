@@ -8,7 +8,6 @@ app = Flask(__name__)
 app.secret_key = "super-secret-key-change-this-later" #needed for flash messages
 
 @app.route("/", methods=["GET", "POST"])
-@app.route('', methods=['GET', 'POST'])
 def home():
     payouts = None
     hourly_rate = None
